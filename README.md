@@ -11,7 +11,7 @@ $ npm i dxfom/text
 ## Usage
 
 ```javascript
-const { parseDxfTextContent } = require('@dxfom/text')
+import { parseDxfTextContent } from '@dxfom/text'
 
 const content = parseDxfTextContent(
   String.raw`%%uunderline%%obothline%%uoverline%%onoline%%kstrike%%k%%c10%%p0.01%%%%%d%%975\U+d83d\U+de04`
@@ -34,4 +34,4 @@ outputs:
 
 ## License
 
-Undecided yet.
+T.B.D.

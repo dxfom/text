@@ -8,12 +8,12 @@
   "keywords": [
     "dxf"
   ],
-  "main": "index.js",
+  "main": "index.mjs",
   "types": "index.d.ts",
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p . && node -e \"require('fs').promises.rename('index.js','index.mjs')\""
   },
   "devDependencies": {
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.2"
   }
 }

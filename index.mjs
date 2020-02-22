@@ -1,11 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// https://knowledge.autodesk.com/ja/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2019/JPN/AutoCAD-Core/files/GUID-968CBC1D-BA99-4519-ABDD-88419EB2BF92-htm.html
+// https://knowledge.autodesk.com/ja/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2019/JPN/AutoCAD-Core/files/GUID-518E1A9D-398C-4A8A-AC32-2D85590CDBE1-htm.html
 const dxfTextControlCodeSymbolMap = {
     d: '°',
     c: '⌀',
     p: '±',
 };
-exports.parseDxfTextContent = (text) => {
+export const parseDxfTextContent = (text) => {
     text = text.replace(/\\[uU]\+([0-9a-fA-F]{4})/g, (_, codePoint) => String.fromCodePoint(parseInt(codePoint, 16)));
     let currentContent = { text: '' };
     const contents = [currentContent];

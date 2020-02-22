@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "CommonJS",
+    "module": "es2020",
     "moduleResolution": "node",
     "declaration": true,
-    "removeComments": true,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
