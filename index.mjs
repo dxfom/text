@@ -1,41 +1,7 @@
-// https://knowledge.autodesk.com/ja/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2019/JPN/AutoCAD-Core/files/GUID-968CBC1D-BA99-4519-ABDD-88419EB2BF92-htm.html
-// https://knowledge.autodesk.com/ja/support/autocad/learn-explore/caas/CloudHelp/cloudhelp/2019/JPN/AutoCAD-Core/files/GUID-518E1A9D-398C-4A8A-AC32-2D85590CDBE1-htm.html
-const dxfTextControlCodeSymbolMap = {
-    d: '°',
-    c: '⌀',
-    p: '±',
-};
-export const parseDxfTextContent = (text) => {
-    text = text.replace(/\\[uU]\+([0-9a-fA-F]{4})/g, (_, codePoint) => String.fromCodePoint(parseInt(codePoint, 16)));
-    let currentContent = { text: '' };
-    const contents = [currentContent];
-    let previousIndex = 0;
-    for (const match of text.matchAll(/%%(\d\d\d|.)/g)) {
-        currentContent.text += text.slice(previousIndex, match.index);
-        const c = match[1];
-        const code = c.toLowerCase();
-        const symbol = dxfTextControlCodeSymbolMap[code];
-        if (symbol) {
-            currentContent.text += symbol;
-        }
-        else if (code.length === 3) {
-            currentContent.text += String.fromCodePoint(+code);
-        }
-        else if (code === 'k' || code === 'o' || code === 'u') {
-            currentContent = { ...currentContent, text: '' };
-            if (currentContent[code]) {
-                delete currentContent[code];
-            }
-            else {
-                currentContent[code] = 1;
-            }
-            contents.push(currentContent);
-        }
-        else {
-            currentContent.text += code;
-        }
-        previousIndex = match.index + match[0].length;
-    }
-    currentContent.text += text.slice(previousIndex);
-    return contents.filter(content => content.text);
-};
+const t={d:"°",c:"⌀",p:"±"}
+export const parseDxfTextContent=e=>{e=e.replace(/\\[uU]\+([0-9a-fA-F]{4})/g,(t,e)=>String.fromCodePoint(parseInt(e,16)))
+let o=0,n={text:""}
+const r=[n]
+for(const x of e.matchAll(/%%(\d\d\d|.)/g)){n.text+=e.slice(o,x.index)
+const s=x[1].toLowerCase(),c=t[s]
+c?n.text+=c:3===s.length?n.text+=String.fromCodePoint(+s):"k"===s||"o"===s||"u"===s?(n={...n,text:""},n[s]?delete n[s]:n[s]=1,r.push(n)):n.text+=s,o=x.index+x[0].length}return n.text+=e.slice(o),r.filter(t=>t.text)}

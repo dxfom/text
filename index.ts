@@ -20,9 +20,9 @@ const dxfTextControlCodeSymbolMap: { [c in string]?: string } = {
 
 export const parseDxfTextContent = (text: string): DxfTextContentElement[] => {
   text = text.replace(/\\[uU]\+([0-9a-fA-F]{4})/g, (_, codePoint) => String.fromCodePoint(parseInt(codePoint, 16)))
+  let previousIndex = 0
   let currentContent: DxfTextContentElement = { text: '' }
   const contents = [currentContent]
-  let previousIndex = 0
   for (const match of text.matchAll(/%%(\d\d\d|.)/g)) {
     currentContent.text += text.slice(previousIndex, match.index)
     const c = match[1]
