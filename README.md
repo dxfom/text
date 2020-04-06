@@ -5,7 +5,7 @@ A low level DXF TEXT content parser.
 ## Installation
 
 ```bash
-$ npm i dxfom/text
+$ npm i @dxfom/text
 ```
 
 ## Usage
