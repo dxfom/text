@@ -34,4 +34,4 @@ outputs:
 
 ## License
 
-T.B.D.
+GPL 3.0
