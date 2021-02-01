@@ -1,6 +1,6 @@
 {
   "name": "@dxfom/text",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A low level DXF TEXT content parser.",
   "license": "GPL-3.0",
   "repository": "dxfom/text",
