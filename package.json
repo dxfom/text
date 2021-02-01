@@ -13,7 +13,7 @@
     "build": "tsc -p . && terser -c -m --toplevel -b beautify=false,semicolons=false --warn -o index.mjs index.js"
   },
   "devDependencies": {
-    "terser": "^4.6.10",
-    "typescript": "^3.8.3"
+    "terser": "^5.5.1",
+    "typescript": "^4.1.3"
   }
 }
