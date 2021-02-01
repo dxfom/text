@@ -18,8 +18,24 @@ const dxfTextControlCodeSymbolMap: { [c in string]?: string } = {
   p: '±',
 }
 
-export const parseDxfTextContent = (text: string): DxfTextContentElement[] => {
-  text = text.replace(/\\[uU]\+([0-9a-fA-F]{4})/g, (_, codePoint) => String.fromCodePoint(parseInt(codePoint, 16)))
+export const decodeDxfTextCharacterCodes = (text: string, mbcsEncoding?: string | TextDecoder) => {
+  text = decodeDxfTextUnicodeCodePoints(text)
+  return mbcsEncoding ? decodeDxfTextMbcsCharacterCodes(text, mbcsEncoding) : text
+}
+
+export const decodeDxfTextUnicodeCodePoints = (text: string) =>
+  text.replace(/\\[uU]\+([0-9a-fA-F]{4})/g, (_, codePoint) => String.fromCodePoint(parseInt(codePoint, 16)))
+
+export const decodeDxfTextMbcsCharacterCodes = (text: string, encoding: string | TextDecoder) => {
+  let decoder: TextDecoder | undefined = encoding instanceof TextDecoder ? encoding : undefined
+  return text.replace(
+    /\\[mM]\+1([0-9a-fA-F]{2})([0-9a-fA-F]{2})/g,
+    (_, a, b) => (decoder = decoder || new TextDecoder(encoding as string)).decode(new Uint8Array([parseInt(a, 16), parseInt(b, 16)]))
+  )
+}
+
+export const parseDxfTextContent = (text: string, options?: { readonly encoding?: string | TextDecoder }): DxfTextContentElement[] => {
+  text = decodeDxfTextCharacterCodes(text, options?.encoding)
   let previousIndex = 0
   let currentContent: DxfTextContentElement = { text: '' }
   const contents = [currentContent]
