@@ -8,9 +8,9 @@ export interface DxfTextContentElement {
     /** underscore */
     u?: 1;
 }
-export declare const decodeDxfTextCharacterCodes: (text: string, mbcsEncoding?: string | TextDecoder | undefined) => string;
+export declare const decodeDxfTextCharacterCodes: (text: string, mbcsEncoding?: string | TextDecoder) => string;
 export declare const decodeDxfTextUnicodeCodePoints: (text: string) => string;
 export declare const decodeDxfTextMbcsCharacterCodes: (text: string, encoding: string | TextDecoder) => string;
 export declare const parseDxfTextContent: (text: string, options?: {
-    readonly encoding?: string | TextDecoder | undefined;
-} | undefined) => DxfTextContentElement[];
+    readonly encoding?: string | TextDecoder;
+}) => DxfTextContentElement[];
